@@ -1,0 +1,61 @@
+repos:
+- repo: local
+    hooks:
+      - id: restricted-filenames
+        name: Check commits for unexpected file extensions
+        entry: These file extensions are unusual and should be checked
+        language: fail
+        files: '.*\.(ipynb|env)'
+      - id: restricted-file-types
+        name: Check commits for unexpected file types
+        entry: These file types are unusual and should be checked
+        language: fail
+        types: ['binary']
+        exclude_types: ['image']
+{% if cookiecutter.use_jupytext %}
+-   repo: https://github.com/mwouts/jupytext
+    rev: v1.15.1
+    hooks:
+    - id: jupytext
+      args: [--sync]
+      always_run: true
+{% endif %}
+- repo: https://github.com/igorshubovych/markdownlint-cli
+  rev: v0.35.0
+  hooks:
+  - id: markdownlint
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    - id: check-yaml
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-toml
+    - id: debug-statements
+-   repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0  # Use the ref you want to point at
+    hooks:
+    -   id: python-check-blanket-noqa
+-   repo: https://github.com/asottile/add-trailing-comma
+    rev: v3.1.0
+    hooks:
+    -   id: add-trailing-comma
+-   repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+    -   id: isort
+-   repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0
+    hooks:
+    -   id: flake8
+-   repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+    -   id: black
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+    -   id: mypy

@@ -1,0 +1,31 @@
+[project]
+name = "{{cookiecutter.package}}"
+description = "{{cookiecutter.description}}"
+license = {file = "LICENSE"}
+authors = [
+  {name = "{{cookiecutter.author}}", email = "{{cookiecutter.email}}" } # Optional
+]
+dynamic = ["version", "readme"]
+
+[project.optional-dependencies] # Optional
+dependencies = []
+dev = ["bump-my-version", "pre-commit"]
+
+[tool.setuptools.dynamic]
+readme = {file = "README.md"}
+version = {attr = "{{cookiecutter.package}}.__version__"}
+
+[tool.bumpversion]
+commit = true
+tag = true
+current_version = "0.0.1"
+
+[[tool.bumpversion.files]]
+filename = "src/{{cookiecutter.package}}/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"

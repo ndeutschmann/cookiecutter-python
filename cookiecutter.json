@@ -1,0 +1,8 @@
+{
+    "package": "package",
+    "author": "First Last",
+    "email": "email@provider.com",
+    "description": "",
+    "use_jupytext": false,
+    "project_slug": "{{ cookiecutter.package }}"
+}
